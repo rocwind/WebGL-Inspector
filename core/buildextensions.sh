@@ -1,8 +1,8 @@
 mkdir lib
 
 cd dependencies
-cat stacktrace.js syntaxhighlighter_3.0.83/shCore.js syntaxhighlighter_3.0.83/shBrushGLSL.js > ../cat.dependencies.js
-cat reset-context.css syntaxhighlighter_3.0.83/shCore.css syntaxhighlighter_3.0.83/shThemeDefault.css > ../cat.dependencies.css
+cat stacktrace.js syntaxhighlighter_4.0.1/syntaxhighlighter.js syntaxhighlighter_4.0.1/shBrushGLSL.js > ../cat.dependencies.js
+cat reset-context.css syntaxhighlighter_4.0.1/theme.css > ../cat.dependencies.css
 cd ..
 
 cd shared

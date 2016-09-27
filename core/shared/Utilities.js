@@ -43,20 +43,25 @@ function glitypename(value) {
         }
     };
     if (value) {
-        var mangled = value.constructor.toString();
-        if (mangled) {
-            var matches = mangled.match(/function (.+)\(/);
-            if (matches) {
+        var mangled;
+        var matches;
+        try {
+            mangled = value.constructor.toString();
+            if (mangled) {
                 // ...function Foo()...
-                if (matches[1] == "Object") {
-                    // Hrm that's likely not right...
-                    // constructor may be fubar
-                    mangled = value.toString();
-                } else {
+                matches = mangled.match(/function (.+)\(/);
+                if (matches && matches[1] != "Object") {
                     return stripConstructor(matches[1]);
                 }
             }
+        } catch (err) {
+            // it's possible the constructor.toString might cause error
+            // known issue is the core-js shim for typed array
+            // so try it with toString() below
+        }
 
+        mangled = Object.prototype.toString.call(value);
+        if (mangled) {
             // [object Foo]
             matches = mangled.match(/\[object (.+)\]/);
             if (matches) {
